@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your Maven project from version control
+                git 'https://github.com/sahilnarwal2111/TestAutomationLabWork'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your Maven project
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Execute the Selenium tests
+                sh 'write to excecute the test cases'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up steps, if any
+        }
+        success {
+            echo 'Tests passed successfully!'
+        }
+        failure {
+            echo 'Tests failed! Please check the logs for details.'
+        }
+    }
+}
